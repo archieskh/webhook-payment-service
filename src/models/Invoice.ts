@@ -2,12 +2,10 @@ import { DataTypes, Model } from "sequelize";
 import { Iinvoice } from "./interface/Invoice";
 import sequelizeConnection from "../db";
 
-export type InvoiceStatus = "sent" | "partially_paid" | "paid";
-
 export default class Invoice extends Model<Iinvoice> implements Iinvoice {
     public id!: number;
     public amount!: number;
-    public status!: InvoiceStatus;
+    public status!: string;
 }
 
 Invoice.init(
@@ -30,7 +28,8 @@ Invoice.init(
     {
         sequelize: sequelizeConnection,
         modelName: "Invoice",
-        tableName: "invoices"
+        tableName: "invoices",
+        timestamps: false
     }
 );
 

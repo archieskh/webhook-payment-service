@@ -1,3 +1,4 @@
+import { error } from "console";
 import sequelizeConnection from "../db";
 import Invoice from "../models/Invoice";
 import Payment from "../models/Payment";
@@ -12,7 +13,8 @@ export async function applyPaymentEvent(params:{event_id: string; invoice_id: nu
             transaction: t, 
             lock: t.LOCK.UPDATE 
         });
-        if (!invoice) throw new Error("Invoice not found");
+        console.log("Invoice found:", invoice);
+        if (!invoice) throw new Error("BAD_INVOICE");
 
         // Insert payment; unique(event_id) enforces idempotency at DB level
         const payment = await Payment.create(
@@ -38,6 +40,6 @@ export async function applyPaymentEvent(params:{event_id: string; invoice_id: nu
 
         await invoice.save({ transaction: t });
 
-        return { invoice_id, status: invoice.status, totalPaid, totalDue: invoice.amount };
+        return { invoice_id, status: invoice.status, totalPaid, totalDue: invoice.amount - totalPaid};
     });
     }
