@@ -39,7 +39,8 @@ Payment.init(
         sequelize: sequelizeConnection,
         modelName: "Payment",
         tableName: "payments",
-        indexes: [{ unique: true, fields: ["event_id"] }]
+        indexes: [{ unique: true, fields: ["event_id"] }],
+        timestamps: false
     }
 );
 
