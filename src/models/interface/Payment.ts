@@ -1,6 +1,6 @@
 export interface IPayment
  {
-    id: number;
+    id?: number;
     event_id: string;
     invoice_id: number;
     amount: number;

@@ -4,7 +4,7 @@ import { IPayment } from "./interface/Payment";
 import sequelizeConnection from "../db";
 
 export default class Payment extends Model<IPayment> implements IPayment {
-    public id!: number;
+    public id?: number;
     public event_id!: string;
     public invoice_id!: number;
     public amount!: number;    
