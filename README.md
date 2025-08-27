@@ -7,26 +7,6 @@ Implemented a simple worker (queue/actor pattern) that processes events asynchro
 
 This makes the service resilient against replay attacks, transient errors, and downtime, while keeping invoices in a consistent state.
 
-# PROJECT STRUCTURE
-src/
-  db.ts                   -----> Sequelize connection
-  models/
-    Invoice.ts            -----> Invoices model
-    Payment.ts            -----> Payments model (with event_id unique constraint)
-    PaymentEvent.ts       -----> Queue model (for async mode)
- services/
-    applyPaymentEvent.ts  -----> Transactional business logic
- routes/
-    webhooks-sync.ts      -----> POST /webhooks-sync/payments
-    webhooks.ts           -----> POST /webhooks/payments
- worker.ts                -----> Async queue processor
- app.ts                   -----> Express app
- server.ts                -----> Entry point
-.env
-package.json
-README.md
-tsconfig.json
-
 # Database Schema
 
 The database consists of three main tables:
