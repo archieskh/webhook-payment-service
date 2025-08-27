@@ -1,10 +1,10 @@
-import { DataTypes, Model, Optional } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import Invoice from "./Invoice";
 import { IPayment } from "./interface/Payment";
 import sequelizeConnection from "../db";
 
 export default class Payment extends Model<IPayment> implements IPayment {
-    public id?: number;
+    public id!: number;
     public event_id!: string;
     public invoice_id!: number;
     public amount!: number;    
@@ -15,7 +15,8 @@ Payment.init(
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
-            primaryKey: true
+            primaryKey: true,
+            allowNull: false
         },
         event_id: {
             type: DataTypes.STRING,

@@ -1,5 +1,6 @@
 import express from 'express';
 import { PaymentRoutes } from './routes/webhooks';
+import { WebhookSyncPaymentRoutes } from './routes/webhooks-sync';
 //import sequelize from "./db"
 
 class App {
@@ -15,6 +16,7 @@ class App {
         this.app.get("/", (req, res) => {
             res.send("API is running");
         });
+        WebhookSyncPaymentRoutes.routes(this.app);
         PaymentRoutes.routes(this.app);
 
     }

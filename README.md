@@ -25,3 +25,12 @@ ASYNC_MODE=false   # true → use async queue
 3. Start the service:
 
 npm run dev
+
+4. How to Run the Worker
+
+Keep your main app running (npm run dev), then in another terminal run:
+ts-node src/worker.ts
+
+Requests to /webhooks/payments will just insert a row into PaymentEvent with status = 'pending'.
+
+The worker polls the DB every 5 seconds and applies those payments.
